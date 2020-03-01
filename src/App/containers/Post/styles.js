@@ -49,7 +49,7 @@ const Title = styled.h1`
 `
 
 const Comments = styled.div`
-  padding-right: 16px;
+  padding-right: 8px;
 `
 
 export default {

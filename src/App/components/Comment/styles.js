@@ -4,6 +4,13 @@ const Container = styled.div`
   position: relative;
   margin: 8px 0;
   display: flex;
+  ${({ locked }) =>
+    locked &&
+    `
+  background-color: rgba(253, 237, 93, 0.4);
+  border-radius: 4px;
+  border: 2px solid rgb(253, 237, 93);
+  `}
 
   > button {
     color: var(--color-tint);
@@ -15,7 +22,9 @@ const Container = styled.div`
   }
 `
 
-const Content = styled.div``
+const Content = styled.div`
+  margin-right: 8px;
+`
 
 const ThreadButton = styled.button`
   flex: 1;

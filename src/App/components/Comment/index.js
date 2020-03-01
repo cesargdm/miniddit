@@ -26,11 +26,11 @@ function Comment(props) {
     onToggleReply({ id: data.id, parents: parentIds })
   }
 
-  function handleVote(voteStatus) {
+  function handleVote(nextVoteStatus) {
     return () =>
       onVote({
-        value: voteStatus === 'UP' ? 1 : -1,
-        status: voteStatus,
+        value: nextVoteStatus === 'UP' ? 1 : -1,
+        status: nextVoteStatus,
         id: data.id,
         parents: parentIds,
       })
@@ -74,17 +74,19 @@ function Comment(props) {
   }
 
   return (
-    <Styles.Container>
+    <Styles.Container locked={data.locked}>
       <Styles.ThreadDecorator>
         <VoteButton
           onClick={handleVote('UP')}
           active={voteStatus === 'UP'}
+          disabled={data.locked}
           small
           up
         />
         <VoteButton
           onClick={handleVote('DOWN')}
           active={voteStatus === 'DOWN'}
+          disabled={data.locked}
           small
         />
         <Styles.ThreadButton onClick={handleToggleComment}>
@@ -95,8 +97,12 @@ function Comment(props) {
         <Styles.Content>
           <Styles.AuthorContainer>
             <p>{data.author}</p>
-            <span>{upsFormatter(data.score)} points</span>
-            <i style={{ fontSize: '0.3rem', alignSelf: 'center' }}>•</i>
+            {!data.locked && (
+              <>
+                <span>{upsFormatter(data.score)} points</span>
+                <i style={{ fontSize: '0.3rem', alignSelf: 'center' }}>•</i>
+              </>
+            )}
             <span>{getLongAgo(data.created_utc)}</span>
           </Styles.AuthorContainer>
           <Markdown source={data.body} />

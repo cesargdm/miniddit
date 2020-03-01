@@ -33,9 +33,27 @@ const PostLink = styled(Link)`
   color: var(--color-text);
   text-decoration: none;
   font-weight: 700;
-
   &:visited {
     color: lightgray;
+  }
+`
+
+const ExternalUrl = styled.span`
+  font-size: 0.8rem;
+  color: var(--color-tint);
+  display: inline-block;
+  max-width: 30%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 1;
+  padding: 0 0 0 6px;
+  vertical-align: text-bottom;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    line-height: 1.4;
   }
 `
 
@@ -44,4 +62,4 @@ const Extra = styled.div`
   margin: 4px 0;
 `
 
-export default { Post, Thumbnail, Content, Link: PostLink, Extra }
+export default { Post, Thumbnail, Content, Link: PostLink, ExternalUrl, Extra }

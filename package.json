@@ -18,6 +18,7 @@
     "@testing-library/react": "^9.4.1",
     "babel-plugin-styled-components": "^1.10.7",
     "eslint-config-nure": "0.0.8",
+    "history": "^4.10.1",
     "jest": "^25.1.0",
     "parcel": "2.0.0-alpha.3",
     "prettier-config-nure": "0.0.1"

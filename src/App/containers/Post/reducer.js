@@ -11,6 +11,8 @@ const REPLY_COMMENT = 'REPLY_COMMENT'
 const VOTE_COMMENT = 'VOTE_COMMENT'
 const TOGGLE_REPLY_COMMENT = 'TOGGLE_REPLY_COMMENT'
 
+const initialState = { loading: true, error: null, data: null }
+
 function reducer(state, action) {
   switch (action.type) {
     case LOAD_COMMENTS:
@@ -139,6 +141,7 @@ function reducer(state, action) {
 }
 
 export {
+  initialState,
   LOAD_COMMENTS,
   LOAD_COMMENTS_ERROR,
   COMMENT_POST,

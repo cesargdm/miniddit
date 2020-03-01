@@ -15,6 +15,7 @@ import VoteButton from '../../components/VoteButton'
 import CommentBox from '../../components/CommentBox'
 
 import reducer, {
+  initialState,
   LOAD_COMMENTS,
   LOAD_COMMENTS_ERROR,
   COMMENT_POST,
@@ -25,8 +26,6 @@ import reducer, {
   TOGGLE_REPLY_COMMENT,
 } from './reducer'
 import Styles from './styles'
-
-const initialState = { loading: true, error: null, data: null }
 
 function Post() {
   const { category, user, slug } = useParams()
@@ -74,7 +73,7 @@ function Post() {
   const commentsData = comments.children
 
   return (
-    <Container>
+    <Container data-testid="post-detail-page">
       <Styles.Content>
         <Styles.Main>
           <VotesContainer>
