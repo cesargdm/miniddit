@@ -5,7 +5,7 @@ const Container = styled.div`
   margin: 8px 0;
   display: flex;
 
-  button {
+  > button {
     color: var(--color-tint);
     font-weight: 600;
     font-size: 0.8rem;
@@ -34,7 +34,7 @@ const ThreadDecorator = styled.div`
     width: 2px;
     height: 100%;
     border: none;
-    background-color: lightgray;
+    background-color: var(--color-content_background-dark);
     margin: 0 auto;
   }
 `
@@ -54,6 +54,18 @@ const AuthorContainer = styled.div`
   }
 `
 
+const ExpandButton = styled.button`
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  background-color: var(--color-tint);
+  color: white !important;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 3px 6px;
+`
+
 export default {
   Children,
   ThreadButton,
@@ -61,4 +73,5 @@ export default {
   Content,
   ThreadDecorator,
   AuthorContainer,
+  ExpandButton,
 }

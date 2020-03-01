@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 
 const Post = styled.div`
   display: flex;
-  border: 1px solid lightgray;
+  border: 1px solid var(--color-content_background-dark);
   margin: -1px 0;
-  background: white;
+  background: var(--color-content_background);
   cursor: pointer;
   overflow: hidden;
   &:hover {
-    border-color: black;
+    border-color: var(--color-content_background-darker);
     z-index: 1;
   }
 `
@@ -30,7 +30,7 @@ const Content = styled.div`
 `
 
 const PostLink = styled(Link)`
-  color: black;
+  color: var(--color-text);
   text-decoration: none;
   font-weight: 700;
 

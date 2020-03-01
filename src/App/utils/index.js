@@ -4,7 +4,7 @@ function upsFormatter(num) {
     : Math.sign(num) * Math.abs(num)
 }
 
-function getDifference(fromDate) {
+function getLongAgo(fromDate) {
   // get total seconds between the times
   const now = Date.now() / 1000
 
@@ -42,4 +42,4 @@ function setScoreByStatus({ score, prevStatus, status, value }) {
   return score
 }
 
-export { setScoreByStatus, getDifference, upsFormatter }
+export { setScoreByStatus, getLongAgo, upsFormatter }

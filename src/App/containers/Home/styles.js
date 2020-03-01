@@ -7,6 +7,7 @@ const PostsContainer = styled.div`
   flex-direction: column;
   max-width: 800px;
   margin: 0 auto;
+
   ${PostStyles.Post} {
     &:first-child {
       border-radius: 4px 4px 0 0;

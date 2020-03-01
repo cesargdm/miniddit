@@ -2,7 +2,7 @@ import React from 'react'
 import Markdown from 'react-markdown'
 
 import { ActionsContainer } from '../../GlobalStyles'
-import { upsFormatter, getDifference } from '../../utils'
+import { upsFormatter, getLongAgo } from '../../utils'
 
 import VoteButton from '../VoteButton'
 import CommentBox from '../CommentBox'
@@ -18,6 +18,7 @@ function Comment(props) {
     onVote,
     onToggleReply,
     onReply,
+    onToggleComment,
     parentIds = [],
   } = props
 
@@ -39,12 +40,35 @@ function Comment(props) {
     onReply({ comment, id: data.id, parents: parentIds })
   }
 
+  function handleToggleComment() {
+    onToggleComment({ id: data.id, parents: parentIds })
+  }
+
   if (kind === 'more') {
     return (
       <Styles.Container>
+        {/* NOTE: fetch more data and call parent mutation */}
         <button onClick={() => console.log(data)}>
           {data.count} more repl{data.count > 1 ? 'ies' : 'y'}
         </button>
+      </Styles.Container>
+    )
+  }
+
+  if (status === 'SHRINK') {
+    return (
+      <Styles.Container>
+        <Styles.ExpandButton onClick={handleToggleComment}>
+          +
+        </Styles.ExpandButton>
+        <Styles.Content>
+          <Styles.AuthorContainer>
+            <p>{data.author}</p>
+            <span>{upsFormatter(data.score)} points</span>
+            <i style={{ fontSize: '0.3rem', alignSelf: 'center' }}>•</i>
+            <span>{getLongAgo(data.created_utc)} ago</span>
+          </Styles.AuthorContainer>
+        </Styles.Content>
       </Styles.Container>
     )
   }
@@ -63,7 +87,7 @@ function Comment(props) {
           active={voteStatus === 'DOWN'}
           small
         />
-        <Styles.ThreadButton>
+        <Styles.ThreadButton onClick={handleToggleComment}>
           <hr />
         </Styles.ThreadButton>
       </Styles.ThreadDecorator>
@@ -73,7 +97,7 @@ function Comment(props) {
             <p>{data.author}</p>
             <span>{upsFormatter(data.score)} points</span>
             <i style={{ fontSize: '0.3rem', alignSelf: 'center' }}>•</i>
-            <span>{getDifference(data.created_utc)} ago</span>
+            <span>{getLongAgo(data.created_utc)} ago</span>
           </Styles.AuthorContainer>
           <Markdown source={data.body} />
         </Styles.Content>
@@ -100,6 +124,7 @@ function Comment(props) {
               onVote={onVote}
               onToggleReply={onToggleReply}
               onReply={onReply}
+              onToggleComment={onToggleComment}
             />
           ),
         )}
