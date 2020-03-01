@@ -1,8 +1,8 @@
 # Miniddit
 
-> Frontend Engineering Take-Home Project
+> Frontend Engineering Take-Home Project built with React
 
-This project is built with Parcel, I wanted to try this alternative to Webpack because of the new React fast refresh support.
+This project is built with [Parcel](https://parceljs.org), I wanted to try this alternative to Webpack because it has the new React fast refresh support. Also using beta of React Router DOM and it works just fine.
 
 ## Running
 
@@ -34,5 +34,7 @@ npm run build
 
 ## Extra features
 
+- Used new UI from reddit
 - Dark mode support (with OS settings)
 - Shrink comment threads like Reddit
+- Created a pair of cool tests (not completed tested)
