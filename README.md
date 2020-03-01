@@ -6,7 +6,7 @@ This project is built with [Parcel](https://parceljs.org), I wanted to try this 
 
 ## Running
 
-> Node 12 is recommended
+> Node 12, and modern browser with fetch support is required
 
 Install dependencies
 
