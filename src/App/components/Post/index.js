@@ -1,24 +1,24 @@
 import React from 'react'
 
-import { ActionsContainer, VotesContainer } from '../../GlobalStyles'
-// import { upsFormatter } from '../../utils'
+import { ActionsContainer, VotesContainer, Score } from '../../GlobalStyles'
+import { upsFormatter } from '../../utils'
 
 import VoteButton from '../VoteButton'
 
 import Styles from './styles'
 
-function Post({ data, onVote }) {
+function Post({ data, onVote, voteStatus }) {
   return (
     <Styles.Post key={data.id}>
       <VotesContainer>
         <VoteButton
-          active={data.status === 'UP'}
+          active={voteStatus === 'UP'}
           onClick={() => onVote({ id: data.id, type: 'UP', value: 1 })}
           up
         />
-        {/* <p>{upsFormatter(data.ups)}</p> */}
+        <Score status={voteStatus}>{upsFormatter(data.score)}</Score>
         <VoteButton
-          active={data.status === 'DOWN'}
+          active={voteStatus === 'DOWN'}
           onClick={() => onVote({ id: data.id, type: 'DOWN', value: -1 })}
         />
       </VotesContainer>

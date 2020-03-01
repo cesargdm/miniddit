@@ -4,8 +4,10 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --color-background: #DAE0E6; 
     
-    --color-up: #819CFF; 
-    --color-down: #FF6E54; 
+    --color-down: #819CFF; 
+    --color-up: #FF6E54; 
+    
+    --color-tint: #336d99; 
   }
 
   /* Define the "system" font family */
@@ -20,6 +22,26 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
+
+  form {
+    input[type="submit"], input[type="button"] {
+      cursor: pointer;
+      background-color: var(--color-tint);
+      padding: 6px 18px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 0.75rem;
+      color: white;
+      &[disabled] {
+        color: rgba(255,255,255,0.4);
+      }
+    }
+    input[type="button"] {
+      background-color: transparent;
+      color: var(--color-tint);
+    }
+  }
 `
 
 const ActionsContainer = styled.div`
@@ -29,7 +51,7 @@ const ActionsContainer = styled.div`
   margin: 8px 0;
   grid-template-columns: repeat(5, auto);
   justify-items: start;
-  button {
+  > * {
     font-size: 0.8rem;
     font-weight: 800;
     color: gray;
@@ -56,5 +78,14 @@ const Container = styled.div`
   min-height: 100vh;
 `
 
-export { Container, ActionsContainer, VotesContainer }
+const Score = styled.p`
+  color: ${({ status }) =>
+    status
+      ? status === 'UP'
+        ? 'var(--color-up)'
+        : 'var(--color-down)'
+      : 'black'};
+`
+
+export { Container, ActionsContainer, Score, VotesContainer }
 export default GlobalStyle

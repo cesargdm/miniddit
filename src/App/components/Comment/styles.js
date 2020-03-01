@@ -4,6 +4,15 @@ const Container = styled.div`
   position: relative;
   margin: 8px 0;
   display: flex;
+
+  button {
+    color: var(--color-tint);
+    font-weight: 600;
+    font-size: 0.8rem;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
 
 const Content = styled.div``
@@ -30,8 +39,14 @@ const ThreadDecorator = styled.div`
   }
 `
 
+const Children = styled.div`
+  flex: 1;
+`
+
 const AuthorContainer = styled.div`
-  display: flex;
+  display: inline-grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 8px;
   font-size: 0.8rem;
   margin-bottom: 8px;
   span {
@@ -40,6 +55,7 @@ const AuthorContainer = styled.div`
 `
 
 export default {
+  Children,
   ThreadButton,
   Container,
   Content,

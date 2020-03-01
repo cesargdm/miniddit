@@ -1,19 +1,16 @@
 import React, { useReducer, useEffect } from 'react'
-import ky from 'ky'
 
-// import { Container } from '../../GlobalStyles'
-// import Post from '../../components/Post'
+import { Container } from '../../GlobalStyles'
+import { getAllPosts } from '../../utils/api'
+import { setScoreByStatus } from '../../utils'
+import Post from '../../components/Post'
 
 import Styles from './styles'
-
-const ALL_URL = 'https://www.reddit.com/r/all.json'
 
 const initialState = { loading: true, error: null, data: null }
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'LOAD_POSTS_START':
-      return { loading: true, error: null, data: null }
     case 'LOAD_POSTS_SUCCESS':
       return { loading: true, error: null, data: action.data }
     case 'LOAD_POSTS_ERROR':
@@ -23,17 +20,23 @@ function reducer(state, action) {
         ...state,
         data: {
           ...state.data,
-          children: state.data.children.map(($0) =>
-            $0.data.id === action.id && $0.data.status !== action.status
+          children: state.data.children.map((post) =>
+            post.data.id === action.id && post.data.status !== action.status
               ? {
-                  ...$0,
+                  ...post,
+                  voteStatus:
+                    post.voteStatus !== action.status && action.status,
                   data: {
-                    ...$0.data,
-                    ups: $0.data.ups + action.value * ($0.data.status ? 2 : 1),
-                    status: action.status,
+                    ...post.data,
+                    score: setScoreByStatus({
+                      score: post.data.score,
+                      value: action.value,
+                      status: action.status,
+                      prevStatus: post.voteStatus,
+                    }),
                   },
                 }
-              : $0,
+              : post,
           ),
         },
       }
@@ -46,20 +49,13 @@ function Home() {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    dispatch({ type: 'LOAD_POSTS_START' })
-
-    function fetchPosts() {
-      ky(ALL_URL)
-        .json()
-        .then(({ data }) => dispatch({ type: 'LOAD_POSTS_SUCCESS', data }))
-        .catch((error) => dispatch({ type: 'LOAD_POSTS_ERROR', error }))
-    }
-
-    fetchPosts()
+    getAllPosts()
+      .then(({ data }) => dispatch({ type: 'LOAD_POSTS_SUCCESS', data }))
+      .catch((error) => dispatch({ type: 'LOAD_POSTS_ERROR', error }))
   }, [])
 
   if (!state.data) {
-    if (state.loading) return <Styles.Container>...</Styles.Container>
+    if (state.loading) return <Container>...</Container>
 
     return state.error ? JSON.stringify(state.error) : 'Error'
   }
@@ -69,13 +65,18 @@ function Home() {
   }
 
   return (
-    <div>
-      {/* <Styles.PostsContainer>
-        {state.data.children.map(({ kind, data }) => (
-          <Post onVote={handleVote} key={data.id} data={data} />
+    <Container>
+      <Styles.PostsContainer>
+        {state.data.children.map(({ kind, data, voteStatus }) => (
+          <Post
+            onVote={handleVote}
+            key={data.id}
+            voteStatus={voteStatus}
+            data={data}
+          />
         ))}
-      </Styles.PostsContainer> */}
-    </div>
+      </Styles.PostsContainer>
+    </Container>
   )
 }
 
