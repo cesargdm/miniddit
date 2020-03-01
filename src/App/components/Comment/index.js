@@ -66,7 +66,7 @@ function Comment(props) {
             <p>{data.author}</p>
             <span>{upsFormatter(data.score)} points</span>
             <i style={{ fontSize: '0.3rem', alignSelf: 'center' }}>•</i>
-            <span>{getLongAgo(data.created_utc)} ago</span>
+            <span>{getLongAgo(data.created_utc)}</span>
           </Styles.AuthorContainer>
         </Styles.Content>
       </Styles.Container>
@@ -97,7 +97,7 @@ function Comment(props) {
             <p>{data.author}</p>
             <span>{upsFormatter(data.score)} points</span>
             <i style={{ fontSize: '0.3rem', alignSelf: 'center' }}>•</i>
-            <span>{getLongAgo(data.created_utc)} ago</span>
+            <span>{getLongAgo(data.created_utc)}</span>
           </Styles.AuthorContainer>
           <Markdown source={data.body} />
         </Styles.Content>

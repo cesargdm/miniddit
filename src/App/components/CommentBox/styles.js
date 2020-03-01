@@ -22,7 +22,7 @@ const Container = styled.form`
 
   textarea {
     border: none;
-    padding: 4px;
+    padding: 8px;
   }
 `
 
